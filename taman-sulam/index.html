@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>The Wedding</title>
+    <!-- EDIT KLIEN: judul diisi otomatis dari tema-konten.js -->
+    <meta name="theme-color" content="#F1E7C6" />
+    <meta property="og:title" content="Undangan Pernikahan" />
+    <!-- EDIT KLIEN: preview WhatsApp -->
+    <meta
+      property="og:description"
+      content="Kami mengundang Anda di hari bahagia kami."
+    />
+    <meta property="og:image" content="assets/foto-1.svg" />
+    <!-- EDIT KLIEN: ganti ke JPG/WebP absolut (WhatsApp tidak menampilkan SVG) -->
+    <script>
+      /* selalu mulai dari cover: matikan pemulihan posisi gulir bawaan browser */
+      try {
+        history.scrollRestoration = "manual";
+      } catch (e) {}
+      addEventListener("beforeunload", function () {
+        scrollTo(0, 0);
+      });
+      addEventListener("pageshow", function (e) {
+        if (e.persisted) location.reload();
+      });
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=Pinyon+Script&display=swap"
+    />
+    <link rel="stylesheet" href="css/layer.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preload" as="image" href="assets/layer/pintu-kiri.webp" />
+    <link rel="preload" as="image" href="assets/layer/pintu-kanan.webp" />
+  </head>
+  <body class="terkunci">
+    <!-- ================= PANEL DESKTOP (kiri; tersembunyi di HP) ================= -->
+    <aside class="sisi" id="sisi" aria-hidden="true">
+      <div class="sisi__adegan"></div>
+      <div class="sisi__isi">
+        <p class="label-kecil">The Wedding of</p>
+        <div class="sisi__foto">
+          <div class="slideshow" data-slideshow="sisi"></div>
+        </div>
+        <h2 class="nama-skrip emas">
+          <span data-k="panggilan.pria"></span> <i>&amp;</i>
+          <span data-k="panggilan.wanita"></span>
+        </h2>
+        <p class="sisi__tgl" data-k="tanggalTeks"></p>
+      </div>
+    </aside>
+
+    <!-- ================= PINTU PEMBUKA ================= -->
+    <div class="pintu" id="pintu">
+      <div class="pintu__k">
+        <img src="assets/layer/pintu-kiri.webp" alt="" />
+      </div>
+      <div class="pintu__r">
+        <img src="assets/layer/pintu-kanan.webp" alt="" />
+      </div>
+      <div class="pintu__isi">
+        <div class="kartu kartu--kecil">
+          <div class="kartu__isi">
+            <p class="label-kecil">Undangan Pernikahan</p>
+            <h1 class="nama-skrip nama-skrip--sedang">
+              <span data-k="panggilan.pria">Nabil</span> &amp;
+              <span data-k="panggilan.wanita">Sofia</span>
+            </h1>
+            <p class="tamu">
+              Kepada Yth. Bapak/Ibu/Saudara/i<strong data-tamu
+                >Tamu Undangan</strong
+              >
+            </p>
+            <button class="btn" id="btn-buka" type="button">
+              Buka Undangan
+            </button>
+          </div>
+          <img
+            class="kartu__bintang"
+            src="assets/svg/bintang-sage.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <main class="app">
+      <!-- ================= 1. COVER: ADEGAN INTRO ================= -->
+      <header class="cover" id="cover">
+        <div class="cover__panggung">
+          <div class="adegan" id="dunia-sumber">
+            <div class="langit"></div>
+            <img class="motif m1" src="assets/svg/sulam-1.svg" alt="" /><img
+              class="motif m2"
+              src="assets/svg/sulam-2.svg"
+              alt=""
+            /><img class="motif m3" src="assets/svg/sulam-3.svg" alt="" />
+            <img class="motif m4" src="assets/svg/sulam-1.svg" alt="" /><img
+              class="motif m5"
+              src="assets/svg/sulam-4.svg"
+              alt=""
+            /><img class="motif m6" src="assets/svg/sulam-2.svg" alt="" />
+            <div class="dunia">
+              <img
+                class="l l-gunung"
+                src="assets/layer/gunung.webp"
+                alt=""
+                style="--es: 1.05"
+              />
+              <div class="kb kb1"></div>
+              <div class="kb kb2"></div>
+              <img
+                class="l l-pohon-pink"
+                src="assets/layer/pohon-pink.webp"
+                alt=""
+                style="--es: 1.12"
+              />
+              <img
+                class="l l-taman"
+                src="assets/layer/taman.webp"
+                alt=""
+                style="--es: 1.15"
+              />
+              <img
+                class="l l-kolonade-kiri"
+                src="assets/layer/kolonade-kiri.webp"
+                alt=""
+                style="--es: 1.22"
+              />
+              <img
+                class="l l-kolonade-kanan"
+                src="assets/layer/kolonade-kanan.webp"
+                alt=""
+                style="--es: 1.22"
+              />
+              <img
+                class="l l-bunga-bawah"
+                src="assets/layer/bunga-bawah.webp"
+                alt=""
+              />
+            </div>
+            <div class="sinar"></div>
+            <div class="kupu-bidang" aria-hidden="true">
+              <span class="kt k1"
+                ><img src="assets/svg/kupu-jingga.svg" alt=""
+              /></span>
+              <span class="kt k2"
+                ><img src="assets/svg/kupu-pink.svg" alt=""
+              /></span>
+              <span class="kt k3"
+                ><img src="assets/svg/kupu-krem.svg" alt=""
+              /></span>
+            </div>
+            <img
+              class="depan ded-k"
+              src="assets/layer/dedaunan-kiri.webp"
+              alt=""
+            />
+            <img
+              class="depan ded-r"
+              src="assets/layer/dedaunan-kanan.webp"
+              alt=""
+            />
+            <div class="depan pita" role="presentation"></div>
+            <img
+              class="depan sam-k"
+              src="assets/layer/bunga-samping-kiri.webp"
+              alt=""
+            />
+            <img
+              class="depan sam-r"
+              src="assets/layer/bunga-samping-kanan.webp"
+              alt=""
+            />
+            <canvas id="fx" aria-hidden="true"></canvas>
+          </div>
+          <div class="kabut"></div>
+          <div class="monogram" aria-hidden="true">
+            <span class="m-a" data-k="monogram.a">A</span
+            ><span class="m-b" data-k="monogram.b">R</span>
+          </div>
+          <div class="nama-hero">
+            <p class="label-emas emas" data-k="labelPembuka">The Wedding Of</p>
+            <h2 class="nama-skrip nama-skrip--besar">
+              <span class="n1" data-k="panggilan.pria">Andi</span
+              ><span class="n2"
+                ><i>&amp;</i> <span data-k="panggilan.wanita">Rani</span></span
+              >
+            </h2>
+          </div>
+          <div class="oval-hero" id="oval-hero">
+            <div class="oval-hero__bingkai">
+              <div class="oval-hero__isi">
+                <p class="label-kecil">The Wedding of</p>
+                <div class="lengkung-foto">
+                  <img
+                    data-k-src="foto.pasangan"
+                    alt="Foto pasangan"
+                    src="assets/foto-1.svg"
+                  />
+                </div>
+                <h2 class="nama-skrip nama-skrip--sedang">
+                  <span class="emas" data-k="panggilan.pria"></span>
+                  <i class="emas">&amp;</i>
+                  <span class="emas" data-k="panggilan.wanita"></span>
+                </h2>
+                <p class="oval-tgl" data-k="tanggalTeks"></p>
+                <p class="oval-hashtag" data-k="hashtag"></p>
+                <p class="oval-situs" data-k="website"></p>
+                <span class="titik-kupu" data-kupu aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+          <div class="gulir" aria-hidden="true">Gulir ke bawah<i></i></div>
+          <button class="lewati" id="btn-lewati" type="button">Lewati</button>
+        </div>
+      </header>
+
+      <!-- ================= 2. SAPA + MEMPELAI (kartu bulat bersudut) ================= -->
+      <section class="sec sec--polos" id="sek-sapa">
+        <div class="kartu kartu--bulat" data-rv="naik">
+          <div class="kartu__isi">
+            <h2 class="judul-skrip" data-rv="tulis">
+              <span class="ts" data-k="judulSapa"></span>
+            </h2>
+            <p class="isi" data-rv="naik" data-k="sambutan"></p>
+            <figure class="foto-oval" data-rv="mekar" data-d=".2">
+              <div class="foto-oval__isi">
+                <img
+                  data-k-src="foto.wanita"
+                  alt="Mempelai wanita"
+                  src="assets/foto-3.svg"
+                />
+              </div>
+              <img
+                class="garnish g1"
+                src="assets/layer/bunga-samping-kiri.webp"
+                alt=""
+              />
+            </figure>
+            <h3
+              class="nama-skrip nama-skrip--sedang"
+              data-rv="naik"
+              data-k="panggilan.wanita"
+            ></h3>
+            <p class="nama-lengkap" data-rv="naik" data-k="wanita.nama"></p>
+            <p class="ortu" data-rv="naik" data-k="wanita.ortu"></p>
+            <a
+              class="btn btn--garis"
+              data-rv="naik"
+              data-k-href="wanita.instagram"
+              target="_blank"
+              rel="noopener"
+              >Instagram</a
+            >
+          </div>
+          <img
+            class="kartu__bintang"
+            src="assets/svg/bintang-sage.svg"
+            alt=""
+          />
+        </div>
+
+        <div class="dan" data-rv="mekar">&amp;</div>
+
+        <div class="kartu kartu--bulat" data-rv="naik">
+          <div class="kartu__isi">
+            <figure class="foto-oval" data-rv="mekar">
+              <div class="foto-oval__isi">
+                <img
+                  data-k-src="foto.pria"
+                  alt="Mempelai pria"
+                  src="assets/foto-2.svg"
+                />
+              </div>
+              <img
+                class="garnish g2"
+                src="assets/layer/bunga-samping-kanan.webp"
+                alt=""
+              />
+            </figure>
+            <h3
+              class="nama-skrip nama-skrip--sedang"
+              data-rv="naik"
+              data-k="panggilan.pria"
+            ></h3>
+            <p class="nama-lengkap" data-rv="naik" data-k="pria.nama"></p>
+            <p class="ortu" data-rv="naik" data-k="pria.ortu"></p>
+            <a
+              class="btn btn--garis"
+              data-rv="naik"
+              data-k-href="pria.instagram"
+              target="_blank"
+              rel="noopener"
+              >Instagram</a
+            >
+          </div>
+          <img
+            class="kartu__bintang"
+            src="assets/svg/bintang-sage.svg"
+            alt=""
+          />
+        </div>
+      </section>
+
+      <!-- ================= 3. SAVE THE DATE (kertas polos) ================= -->
+      <section class="sec sec--polos" id="sek-tanggal">
+        <h2 class="judul-caps" data-rv="naik">Save The Date</h2>
+        <blockquote class="kutipan" data-rv="naik" data-d=".1">
+          <span data-k="kutipan.teks"></span
+          ><small data-k="kutipan.sumber"></small>
+        </blockquote>
+        <div
+          class="hitung"
+          id="hitung"
+          role="timer"
+          aria-label="Hitung mundur hari pernikahan"
+          data-rv="zoom"
+        >
+          <div><b data-h="hari">00</b><span>Hari</span></div>
+          <i>:</i>
+          <div><b data-h="jam">00</b><span>Jam</span></div>
+          <i>:</i>
+          <div><b data-h="menit">00</b><span>Menit</span></div>
+          <i>:</i>
+          <div><b data-h="detik">00</b><span>Detik</span></div>
+        </div>
+        <a
+          class="btn"
+          id="btn-kalender"
+          data-rv="naik"
+          target="_blank"
+          rel="noopener"
+          ><img
+            class="ikon-tombol"
+            src="assets/svg/ikon-hati.svg"
+            alt=""
+          />Simpan Tanggal</a
+        >
+        <img
+          class="vinyet"
+          src="assets/layer/vinyet-taman.webp"
+          alt=""
+          data-rv="naik"
+        />
+      </section>
+
+      <!-- ================= 4. WEDDING EVENT (slideshow + kartu lengkung melayang) ================= -->
+      <section class="sec sec--foto" id="sek-acara">
+        <div class="slideshow" data-slideshow="acara"></div>
+        <div class="sec__tint"></div>
+        <h2 class="judul-skrip judul-skrip--putih" data-rv="tulis">
+          <span class="ts">Wedding Event</span>
+        </h2>
+        <p class="isi isi--putih" data-rv="naik" data-k="acaraTeks"></p>
+        <div id="daftar-acara"></div>
+        <!-- kartu lengkung dibuat dari WC_KONTEN.acara -->
+      </section>
+
+      <!-- ================= 5. LIVE STREAMING (kertas) ================= -->
+      <section class="sec sec--polos" id="sek-live">
+        <img
+          class="ikon-bulat"
+          src="assets/svg/ikon-live.svg"
+          alt=""
+          data-rv="mekar"
+        />
+        <h2 class="judul-caps" data-rv="naik" data-k="live.judul"></h2>
+        <p class="isi" data-rv="naik" data-k="live.teks"></p>
+        <a
+          class="btn"
+          id="btn-live"
+          data-rv="naik"
+          target="_blank"
+          rel="noopener"
+          ><img
+            class="ikon-tombol"
+            src="assets/svg/ikon-live.svg"
+            alt="" /><span data-k="live.tombol"></span
+        ></a>
+      </section>
+
+      <!-- ================= 6. GALERI FOTO (kolase, reveal satu per satu) ================= -->
+      <section class="sec sec--polos" id="sek-galeri">
+        <h2 class="judul-galeri" data-rv="tulis">
+          <span class="ts"><span class="g1">Galeri</span><em>Foto</em></span>
+        </h2>
+        <div class="kolase" id="galeri-kolase"></div>
+      </section>
+
+      <!-- ================= 7. LOVE STORY (latar tetap + timeline) ================= -->
+      <section class="sec sec--cerita" id="sek-cerita">
+        <div class="cerita__bg" aria-hidden="true">
+          <div class="cerita__pola"></div>
+          <img
+            class="cerita__vinyet"
+            src="assets/layer/vinyet-taman.webp"
+            alt=""
+          />
+        </div>
+        <div class="cerita__isi">
+          <h2 class="judul-skrip judul-skrip--putih" data-rv="tulis">
+            <span class="ts">Love Story</span>
+          </h2>
+          <div class="garis-waktu">
+            <i class="hati-jalan"></i>
+            <div id="daftar-cerita"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 8. WEDDING GIFT (slideshow + kartu debit, tanpa input) ================= -->
+      <section class="sec sec--foto" id="sek-hadiah">
+        <div class="slideshow" data-slideshow="hadiah"></div>
+        <div class="sec__tint"></div>
+        <img
+          class="ikon-bulat ikon-bulat--gelap"
+          src="assets/svg/ikon-hadiah.svg"
+          alt=""
+          data-rv="mekar"
+        />
+        <h2 class="judul-skrip judul-skrip--putih" data-rv="tulis">
+          <span class="ts" data-k="hadiah.judul"></span>
+        </h2>
+        <p class="isi isi--putih" data-rv="naik" data-k="hadiah.teks"></p>
+        <div class="tumpuk-kartu" id="daftar-rekening"></div>
+        <div class="tumpuk-kartu" id="alamat-kado"></div>
+      </section>
+
+      <!-- ================= 9. RSVP & UCAPAN (slideshow + kartu kaca buram) ================= -->
+      <section class="sec sec--foto sec--kaca" id="sek-rsvp">
+        <div class="slideshow slideshow--buram" data-slideshow="rsvp"></div>
+        <div class="sec__tint"></div>
+        <div class="kaca" data-rv="naik">
+          <h2 class="judul-kaca" data-rv="naik">RSVP &amp; Ucapan</h2>
+          <p class="isi isi--putih" data-rv="naik">
+            Berikan ucapan dan konfirmasi kehadiran Anda. Kami sangat menghargai
+            doa dan kehadiran Anda.
+          </p>
+          <!-- =========================================
+     BLOK FORM RSVP (TEKS HITAM & RAPI)
+     ========================================= -->
+          <form
+            id="form-rsvp"
+            style="
+              max-width: 500px;
+              margin: 0 auto;
+              text-align: left;
+              padding: 20px;
+              background: rgba(255, 255, 255, 0.85);
+              border-radius: 12px;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+              backdrop-filter: blur(5px);
+            "
+          >
+            <div style="margin-bottom: 15px">
+              <label
+                style="
+                  display: block;
+                  color: #333;
+                  font-weight: bold;
+                  font-size: 0.9rem;
+                  margin-bottom: 6px;
+                "
+                >Nama Undangan</label
+              >
+              <input
+                type="text"
+                id="nama-tamu"
+                readonly
+                style="
+                  width: 100%;
+                  box-sizing: border-box;
+                  padding: 12px 15px;
+                  border-radius: 8px;
+                  border: 1px solid #ccc;
+                  background-color: #eaeaea;
+                  color: #000;
+                  font-weight: bold;
+                  cursor: not-allowed;
+                  outline: none;
+                "
+              />
+            </div>
+
+            <div style="margin-bottom: 15px">
+              <label
+                style="
+                  display: block;
+                  color: #333;
+                  font-weight: bold;
+                  font-size: 0.9rem;
+                  margin-bottom: 6px;
+                "
+                >Status Kehadiran</label
+              >
+              <select
+                id="kehadiran-tamu"
+                style="
+                  width: 100%;
+                  box-sizing: border-box;
+                  padding: 12px 15px;
+                  border-radius: 8px;
+                  border: 1px solid #ccc;
+                  background-color: #fff;
+                  color: #000;
+                  font-size: 0.95rem;
+                  outline: none;
+                  cursor: pointer;
+                "
+              >
+                <option value="Hadir">Insya Allah, saya hadir</option>
+                <option value="Tidak Hadir">Maaf, saya tidak bisa hadir</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: 20px">
+              <label
+                style="
+                  display: block;
+                  color: #333;
+                  font-weight: bold;
+                  font-size: 0.9rem;
+                  margin-bottom: 6px;
+                "
+                >Ucapan & Doa</label
+              >
+              <textarea
+                id="ucapan-tamu"
+                rows="3"
+                required
+                placeholder="Tuliskan doa terbaik untuk mempelai..."
+                style="
+                  width: 100%;
+                  box-sizing: border-box;
+                  padding: 12px 15px;
+                  border-radius: 8px;
+                  border: 1px solid #ccc;
+                  background-color: #fff;
+                  color: #000;
+                  font-family: inherit;
+                  font-size: 0.95rem;
+                  outline: none;
+                  resize: vertical;
+                "
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              id="btn-kirim"
+              style="
+                width: 100%;
+                padding: 14px;
+                border-radius: 8px;
+                background-color: #b78953;
+                color: #fff;
+                border: none;
+                font-weight: bold;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: 0.3s;
+                box-shadow: 0 4px 6px rgba(183, 137, 83, 0.3);
+              "
+            >
+              Kirim Ucapan
+            </button>
+          </form>
+
+          <div class="daftar-ucapan-wrapper mt-8">
+            <h3 class="text-lg font-semibold mb-4 text-gray-700">
+              Ucapan Teman-teman:
+            </h3>
+
+            <!-- Wadah ini diberi batas tinggi (h-72) dan scroll (overflow-y-auto) agar tidak memanjangkan halaman terlalu ekstrem di HP -->
+            <div
+              id="wadah-guestbook"
+              class="h-72 overflow-y-auto pr-2 space-y-3"
+            >
+              <!-- Data dari Supabase akan disuntikkan otomatis ke sini oleh js/core.js -->
+              <p class="text-center text-sm text-gray-400">
+                Memuat ucapan yang penuh cinta...
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 10. TERIMA KASIH (kertas + vinyet + footer) ================= -->
+      <section class="sec sec--polos sec--penutup" id="sek-penutup">
+        <p class="label-pink" data-rv="naik">Terima Kasih</p>
+        <h2 class="nama-skrip nama-skrip--besar emas" data-rv="tulis">
+          <span class="ts"
+            ><span data-k="panggilan.pria"></span> <i>&amp;</i>
+            <span data-k="panggilan.wanita"></span
+          ></span>
+        </h2>
+        <p class="isi" data-rv="naik" data-k="penutup"></p>
+        <img
+          class="vinyet"
+          src="assets/layer/vinyet-taman.webp"
+          alt=""
+          data-rv="naik"
+        />
+        <footer class="kaki" data-rv="naik">
+          <p class="kaki__merk">Wedding Code</p>
+          <p class="kaki__teks">Exclusive Web Invitation</p>
+          <div class="kaki__sosial" id="kaki-sosial"></div>
+        </footer>
+      </section>
+    </main>
+
+    <button
+      class="musik"
+      id="btn-musik"
+      type="button"
+      aria-pressed="false"
+      aria-label="Hidupkan musik"
+      title="Musik"
+    >
+      <svg class="musik__cincin" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="22" />
+      </svg>
+      <img class="musik__bunga" src="assets/svg/sulam-1.svg" alt="" />
+      <span class="musik__batang" aria-hidden="true"
+        ><i></i><i></i><i></i
+      ></span>
+      <span class="musik__garis" aria-hidden="true"></span>
+    </button>
+    <span
+      class="musik-label"
+      id="musik-label"
+      role="status"
+      aria-live="polite"
+    ></span>
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-label="Pratinjau foto"
+    >
+      <button id="lb-tutup" type="button" aria-label="Tutup">&times;</button
+      ><button id="lb-prev" type="button" aria-label="Sebelumnya">
+        &#8249;</button
+      ><img alt="" /><button id="lb-next" type="button" aria-label="Berikutnya">
+        &#8250;
+      </button>
+    </div>
+
+    <!-- 1. Tambahkan baris ini dulu, Sir! (Mesin Supabase) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- 2. Baru panggil skrip lokal Sir yang ada di gambar -->
+    <script src="js/konfigurasi.js"></script>
+    <script src="js/tema-konten.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/tema-taman-sulam.js"></script>
+    <script src="js/hidup.js"></script>
+    <script src="js/terbang.js"></script>
+  </body>
+</html>

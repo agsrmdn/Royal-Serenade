@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Admin - Dasbor Mempelai</title>
+    <!-- Panggil Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      body {
+        margin: 0;
+        font:
+          15px/1.6 system-ui,
+          sans-serif;
+        background: #f1e7c6;
+        color: #4a3a1e;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 20px 16px 60px;
+      }
+      h1 {
+        font:
+          600 24px Georgia,
+          serif;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font:
+          600 18px Georgia,
+          serif;
+        margin: 0 0 4px;
+        color: #8e5a78;
+      }
+
+      /* Statistik 4 Kolom */
+      .stat {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .stat div {
+        background: #8e5a78;
+        color: #f9f3dd;
+        border-radius: 14px;
+        padding: 16px 8px;
+        text-align: center;
+        box-shadow: inset 0 0 0 1.5px #b8923a;
+      }
+      .stat b {
+        display: block;
+        font:
+          600 28px Georgia,
+          serif;
+        margin-bottom: 4px;
+      }
+      .stat span {
+        font-size: 12px;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      @media (max-width: 500px) {
+        .stat {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .bar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      input,
+      button,
+      textarea {
+        min-height: 44px;
+        border-radius: 12px;
+        border: 1.5px solid #ddcd9a;
+        padding: 10px 12px;
+        font: inherit;
+        background: #fff;
+      }
+      button {
+        background: #8e5a78;
+        color: #fff;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+
+      .note {
+        background: #fff6dc;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        margin: 12px 0;
+        border: 1px solid #ddcd9a;
+      }
+
+      /* Panel Generator Khusus (Desain Tab) */
+      .panel-gen {
+        background: #fff;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border: 1.5px solid #ddcd9a;
+      }
+      .template-box {
+        margin-top: 16px;
+        background: #f9f3dd;
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid #ddcd9a;
+      }
+
+      .tab-container {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .btn-tab {
+        flex: 1;
+        background: transparent;
+        color: #8e5a78;
+        border: 1.5px solid #8e5a78;
+        border-radius: 8px;
+        min-height: 38px;
+      }
+      .btn-tab.active {
+        background: #8e5a78;
+        color: #fff;
+      }
+
+      #teks-preview {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 220px;
+        resize: vertical;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+      .btn-salin-lebar {
+        width: 100%;
+        background: #4a3a1e;
+        min-height: 48px;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Dasbor Mempelai</h1>
+      <p id="judul" style="margin: 0 0 16px; opacity: 0.8">Memuat...</p>
+
+      <div class="note" id="catatan" hidden>
+        Konfigurasi Supabase belum lengkap di <code>js/konfigurasi.js</code>.
+      </div>
+
+      <!-- PANEL GENERATOR LINK & TEKS -->
+      <div class="panel-gen">
+        <h2 style="margin-bottom: 12px">Buat Link & Teks Undangan</h2>
+        <div class="bar">
+          <input
+            id="gen-nama"
+            placeholder="Ketik nama tamu (Contoh: Agus Ramdan)"
+            style="flex: 1; min-width: 200px"
+          />
+          <button id="btn-gen" type="button">Buat Teks</button>
+        </div>
+
+        <div id="wadah-template" class="template-box" style="display: none">
+          <!-- Pilihan Variasi Teks -->
+          <div class="tab-container">
+            <button
+              id="tab-hangat"
+              class="btn-tab active"
+              onclick="pilihTab('hangat')"
+            >
+              Teks Hangat
+            </button>
+            <button
+              id="tab-singkat"
+              class="btn-tab"
+              onclick="pilihTab('singkat')"
+            >
+              Teks Singkat
+            </button>
+            <button
+              id="tab-formal"
+              class="btn-tab"
+              onclick="pilihTab('formal')"
+            >
+              Teks Formal
+            </button>
+          </div>
+
+          <!-- Area Edit & Pratinjau Luas -->
+          <textarea
+            id="teks-preview"
+            placeholder="Teks akan muncul di sini..."
+          ></textarea>
+
+          <!-- Tombol Salin -->
+          <button class="btn-salin-lebar" onclick="salinTeksPreview()">
+            Salin Teks Undangan
+          </button>
+        </div>
+      </div>
+
+      <!-- PANEL STATISTIK (PRIVASI TERJAGA) -->
+      <div
+        class="panel-gen"
+        style="
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          padding: 0;
+          margin-bottom: 0;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h2>Statistik Interaksi</h2>
+          <button
+            id="muat"
+            type="button"
+            style="
+              padding: 6px 12px;
+              min-height: 36px;
+              border-radius: 8px;
+              font-size: 13px;
+            "
+          >
+            🔄 Segarkan
+          </button>
+        </div>
+        <p style="font-size: 13px; opacity: 0.8; margin-top: 0">
+          Tabel rincian tamu disembunyikan untuk menjaga privasi.
+        </p>
+
+        <div class="stat">
+          <div><b id="s-hadir">0</b><span>Hadir</span></div>
+          <div><b id="s-tidak">0</b><span>Tidak Hadir</span></div>
+          <div><b id="s-ucapan">0</b><span>Ucapan</span></div>
+          <div><b id="s-balasan">0</b><span>Balasan</span></div>
+        </div>
+      </div>
+
+      <script src="js/konfigurasi.js"></script>
+      <script>
+        let dataTeksGenerator = { hangat: "", singkat: "", formal: "" };
+
+        (function () {
+          const C = window.WC_CONFIG;
+          const $ = (s) => document.querySelector(s);
+
+          $("#judul").textContent = "Mengelola ID: " + C.UNDANGAN_ID;
+
+          const adaSupa = C.supabaseUrl && C.supabaseAnonKey;
+          $("#catatan").hidden = !!adaSupa;
+
+          let supabase = null;
+          if (adaSupa) {
+            supabase = window.supabase.createClient(
+              C.supabaseUrl,
+              C.supabaseAnonKey,
+            );
+          }
+
+          // Fungsi Tarik & Hitung Statistik
+          async function muat() {
+            if (!adaSupa) return;
+            const btn = $("#muat");
+            btn.textContent = "...";
+
+            try {
+              // Hanya menarik kolom yang dibutuhkan untuk statistik
+              const { data: resData, error } = await supabase
+                .from("ucapan_tamu")
+                .select("kehadiran, pasangan!inner(slug), balasan_ucapan(id)")
+                .eq("pasangan.slug", C.UNDANGAN_ID);
+
+              if (error) throw error;
+              const data = resData || [];
+
+              // Kalkulasi Statistik
+              const hadir = data.filter((d) => d.kehadiran === "Hadir").length;
+              const tidak = data.filter(
+                (d) => d.kehadiran === "Tidak Hadir",
+              ).length;
+              const ucapan = data.length;
+              const balasan = data.reduce(
+                (acc, curr) =>
+                  acc + (curr.balasan_ucapan ? curr.balasan_ucapan.length : 0),
+                0,
+              );
+
+              // Render ke UI
+              $("#s-hadir").textContent = hadir;
+              $("#s-tidak").textContent = tidak;
+              $("#s-ucapan").textContent = ucapan;
+              $("#s-balasan").textContent = balasan;
+            } catch (err) {
+              console.error("Gagal memuat:", err.message);
+            } finally {
+              btn.textContent = "🔄 Segarkan";
+            }
+          }
+
+          $("#muat").addEventListener("click", muat);
+
+          // ==========================================
+          // LOGIKA GENERATOR TEKS PREMIUM & PANJANG
+          // ==========================================
+          const baseUrl =
+            window.location.origin +
+            window.location.pathname.replace(/\/admin\.html$/, "/index.html");
+
+          $("#btn-gen").addEventListener("click", () => {
+            const inputNama = $("#gen-nama").value.trim();
+            const namaTamu = inputNama || "Tamu Spesial";
+
+            const paramLink = C.PARAM_TAMU || "to";
+            const linkUndangan = `${baseUrl}?${paramLink}=${encodeURIComponent(namaTamu)}`;
+
+            // 1. Teks Hangat (Panjang, akrab, puitis, cocok untuk sahabat/teman dekat)
+            dataTeksGenerator.hangat = `Halo ${namaTamu},\n\nSemoga pesan ini menjumpai kamu dalam keadaan sehat dan bahagia selalu.\n\nDi antara banyak cerita dan perjalanan yang telah dilalui, kami akhirnya melangkah menuju babak baru. Dengan penuh rasa syukur dan kerendahan hati, kami ingin membagikan kabar bahagia ini sekaligus mengundang kamu untuk hadir di hari pernikahan kami.\n\nUntuk detail rangkaian acara, waktu, serta lokasi pelaksanaannya, kamu bisa melihatnya secara lengkap melalui tautan undangan digital berikut ini:\n\n${linkUndangan}\n\nKehadiran, tawa, dan doa restu dari kamu akan menjadi salah satu hadiah terindah di hari istimewa kami. Kami sangat berharap kamu bisa meluangkan waktu untuk datang dan merayakannya bersama kami.\n\nJangan lupa untuk mengisi konfirmasi kehadiran (RSVP) di dalam tautan tersebut ya. Sampai jumpa di hari bahagia kami!\n\nSalam hangat dari kami.`;
+
+            // 2. Teks Singkat (Padat, elegan, sopan, namun tidak kaku - cocok untuk rekan kerja/kenalan)
+            dataTeksGenerator.singkat = `Kepada Yth. ${namaTamu},\n\nSemoga kesejahteraan dan kebahagiaan senantiasa menyertai Anda.\n\nMelalui pesan ini, kami bermaksud menyampaikan kabar gembira sekaligus mengundang Anda untuk turut hadir memeriahkan acara pernikahan kami.\n\nInformasi lengkap mengenai waktu dan lokasi acara telah kami rangkum dengan rapi di dalam undangan digital berikut:\n\n${linkUndangan}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu secara langsung. Mohon kesediaannya juga untuk mengisi form konfirmasi kehadiran pada tautan di atas.\n\nTerima kasih atas perhatian dan waktu yang telah diberikan.`;
+
+            // 3. Teks Formal (Resmi, berwibawa, sangat sopan - cocok untuk orang tua, keluarga besar, atau atasan)
+            dataTeksGenerator.formal = `Bismillahirrohmanirrohim.\nAssalamu'alaikum Warahmatullahi Wabarakatuh.\n\nKepada Yth. Bapak/Ibu/Saudara/i ${namaTamu},\n\nDengan memanjatkan puji syukur ke hadirat Allah SWT, serta tanpa mengurangi rasa hormat, izinkan kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami.\n\nAdapun detail informasi mengenai susunan acara, penunjuk arah lokasi, dan waktu pelaksanaan dapat diakses langsung melalui tautan undangan digital di bawah ini:\n\n${linkUndangan}\n\nMengingat betapa penting dan sakralnya momen ini bagi kami, kehadiran serta untaian doa restu dari Bapak/Ibu/Saudara/i akan menjadi suatu kehormatan yang tak terhingga bagi keluarga besar kami.\n\nAtas perhatian, waktu, serta doa restunya, kami haturkan terima kasih yang sebesar-besarnya.\n\nWassalamu'alaikum Warahmatullahi Wabarakatuh.`;
+
+            $("#wadah-template").style.display = "block";
+            pilihTab("hangat"); // Tampilkan tab hangat secara default saat baru di-generate
+          });
+
+          if (typeof supabase !== "undefined") muat();
+        })();
+
+        // Navigasi Tab Generator
+        window.pilihTab = function (jenis) {
+          document
+            .querySelectorAll(".btn-tab")
+            .forEach((btn) => btn.classList.remove("active"));
+          document.getElementById("tab-" + jenis).classList.add("active");
+          document.getElementById("teks-preview").value =
+            dataTeksGenerator[jenis];
+        };
+
+        // Fungsi Salin Teks
+        window.salinTeksPreview = function () {
+          const textarea = document.getElementById("teks-preview");
+          textarea.select();
+          textarea.setSelectionRange(0, 99999);
+          navigator.clipboard
+            .writeText(textarea.value)
+            .then(() => {
+              alert("Teks undangan berhasil disalin dan siap dibagikan.");
+            })
+            .catch((err) => {
+              alert("Gagal menyalin teks.");
+            });
+        };
+      </script>
+    </main>
+  </body>
+</html>

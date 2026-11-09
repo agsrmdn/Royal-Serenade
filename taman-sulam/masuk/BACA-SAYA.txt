@@ -1,0 +1,17 @@
+Letakkan gambar hasil AI/ilustrator di folder ini, lalu jalankan:  python3 alat/pasang-layer.py --pratinjau
+
+NAMA FILE = nama lapisan (ekstensi bebas: png/jpg/webp). Ukuran target (otomatis dipotong dari tengah bila rasio beda):
+  gunung.png            860 x 340    pegunungan berkabut
+  pohon-pink.png        860 x 430    barisan pohon bunga pink
+  kolonade-kiri.png     430 x 340    galeri berpilar sisi kiri (kanan = cermin/versi lain)
+  kolonade-kanan.png    430 x 340
+  taman.png             860 x 480    parterre, jalan, air mancur bertingkat
+  bunga-bawah.png       860 x 320    hamparan bunga depan
+  dedaunan-kiri.png     430 x 520    dahan menjuntai dari sudut kiri atas
+  dedaunan-kanan.png    430 x 520
+  bunga-samping-kiri.png  260 x 460
+  bunga-samping-kanan.png 260 x 460
+  pintu-kiri.png        430 x 1500   tepi KANAN bergelombang
+  pintu-kanan.png       430 x 1500   tepi KIRI bergelombang
+Latar polos putih akan dihapus otomatis (kecuali gambar sudah transparan).
+Tip: minta AI membuat tiap lapisan di latar putih polos, resolusi 2x ukuran di atas.

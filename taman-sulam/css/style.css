@@ -496,3 +496,50 @@ body.mulai .musik.aktif { display: grid; }
 .kd-bungkus .kd__salin { background: rgba(255,248,232,.94); color: var(--emas-dk); box-shadow: 0 0 0 1.4px var(--emas), 0 6px 14px rgba(30,18,4,.3); min-height: 38px; padding: 0 20px; }
 .kd:nth-of-type(1).melayang { rotate: -1.3deg; }
 @media (prefers-reduced-motion: reduce) { .kd::after { animation: none; } }
+/* =========================================
+   KOMPONEN UI: TANGGAL ELEGAN (SAVE THE DATE)
+   ========================================= */
+.tanggal-elegan {
+  text-align: center;
+  margin: 16px auto 24px;
+  color: #4A3A1E;
+}
+
+.tanggal-elegan .hari {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #8E5A78;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tanggal-elegan .angka-besar {
+  font-family: 'Georgia', serif;
+  font-size: 48px;
+  line-height: 1;
+  color: #8E5A78;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.tanggal-elegan .pemisah {
+  font-size: 32px;
+  font-weight: 300;
+  color: #B8923A;
+  opacity: 0.5;
+  transform: translateY(-2px);
+}
+
+.tanggal-elegan .bulan-tahun {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #4A3A1E;
+  opacity: 0.85;
+}

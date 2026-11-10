@@ -312,45 +312,70 @@
 
       <!-- ================= 3. SAVE THE DATE (kertas polos) ================= -->
       <section class="sec sec--polos" id="sek-tanggal">
-        <h2 class="judul-caps" data-rv="naik">Save The Date</h2>
-        <blockquote class="kutipan" data-rv="naik" data-d=".1">
-          <span data-k="kutipan.teks"></span
-          ><small data-k="kutipan.sumber"></small>
-        </blockquote>
-        <div
-          class="hitung"
-          id="hitung"
-          role="timer"
-          aria-label="Hitung mundur hari pernikahan"
-          data-rv="zoom"
-        >
-          <div><b data-h="hari">00</b><span>Hari</span></div>
-          <i>:</i>
-          <div><b data-h="jam">00</b><span>Jam</span></div>
-          <i>:</i>
-          <div><b data-h="menit">00</b><span>Menit</span></div>
-          <i>:</i>
-          <div><b data-h="detik">00</b><span>Detik</span></div>
-        </div>
-        <a
-          class="btn"
-          id="btn-kalender"
-          data-rv="naik"
-          target="_blank"
-          rel="noopener"
-          ><img
-            class="ikon-tombol"
-            src="assets/svg/ikon-hati.svg"
-            alt=""
-          />Simpan Tanggal</a
-        >
-        <img
-          class="vinyet"
-          src="assets/layer/vinyet-taman.webp"
-          alt=""
-          data-rv="naik"
-        />
-      </section>
+  <h2 class="judul-caps" data-rv="naik">Save The Date</h2>
+  
+  <!-- =========================================
+       INJEKSI BARU: TAMPILAN TANGGAL ELEGAN
+       ========================================= -->
+  <div class="tanggal-elegan" data-rv="naik" data-d=".05">
+    <!-- EDIT KLIEN: Hari Acara -->
+    <span class="hari">Sabtu</span>
+    
+    <div class="angka-besar">
+      <!-- EDIT KLIEN: Tanggal -->
+      <span>28</span>
+      <span class="pemisah">|</span>
+      <!-- EDIT KLIEN: Bulan (Angka) -->
+      <span>11</span>
+      <span class="pemisah">|</span>
+      <!-- EDIT KLIEN: Tahun (2 Digit) -->
+      <span>26</span>
+    </div>
+    
+    <!-- EDIT KLIEN: Bulan & Tahun Teks -->
+    <span class="bulan-tahun">November 2026</span>
+  </div>
+  <!-- ========================================= -->
+
+  <blockquote class="kutipan" data-rv="naik" data-d=".1">
+    <span data-k="kutipan.teks"></span><small data-k="kutipan.sumber"></small>
+  </blockquote>
+  
+  <div
+    class="hitung"
+    id="hitung"
+    role="timer"
+    aria-label="Hitung mundur hari pernikahan"
+    data-rv="zoom"
+  >
+    <div><b data-h="hari">00</b><span>Hari</span></div>
+    <i>:</i>
+    <div><b data-h="jam">00</b><span>Jam</span></div>
+    <i>:</i>
+    <div><b data-h="menit">00</b><span>Menit</span></div>
+    <i>:</i>
+    <div><b data-h="detik">00</b><span>Detik</span></div>
+  </div>
+  
+  <a
+    class="btn"
+    id="btn-kalender"
+    data-rv="naik"
+    target="_blank"
+    rel="noopener"
+  ><img
+      class="ikon-tombol"
+      src="assets/svg/ikon-hati.svg"
+      alt=""
+    />Simpan Tanggal</a>
+    
+  <img
+    class="vinyet"
+    src="assets/layer/vinyet-taman.webp"
+    alt=""
+    data-rv="naik"
+  />
+</section>
 
       <!-- ================= 4. WEDDING EVENT (slideshow + kartu lengkung melayang) ================= -->
       <section class="sec sec--foto" id="sek-acara">

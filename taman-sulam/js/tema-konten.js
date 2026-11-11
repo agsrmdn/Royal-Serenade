@@ -16,7 +16,7 @@ window.WC_KONTEN = {
   // EDIT KLIEN: waktu utama (countdown) & teks tanggal
   tanggalUtama: "2026-12-31T08:00:00+07:00",
   tanggalTeks: "Minggu, 31 Desember 2026",
-  tanggalPendek: "20 . 12 . 2026",
+  tanggalPendek: "31 . 12 . 2026",
 
   // EDIT KLIEN: foto tunggal (WebP/JPG <150KB). Dipakai di kartu & panel desktop
   foto: {
@@ -77,7 +77,7 @@ window.WC_KONTEN = {
   acara: [
     {
       nama: "Akad Nikah",
-      tanggal: "Minggu, 20 Desember 2026",
+      tanggal: "Kamis, 31 Desember 2026",
       jam: "08.00 - 10.00 WIB",
       tempat: "Pendopo Taman Sari",
       alamat: "Jl. Kaliurang Km 7, Sleman, Yogyakarta",
@@ -85,7 +85,7 @@ window.WC_KONTEN = {
     },
     {
       nama: "Resepsi",
-      tanggal: "Minggu, 20 Desember 2026",
+      tanggal: "Kamis, 31 Desember 2026",
       jam: "11.00 - 14.00 WIB",
       tempat: "Pendopo Taman Sari",
       alamat: "Jl. Kaliurang Km 7, Sleman, Yogyakarta",
